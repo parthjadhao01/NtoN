@@ -22,11 +22,10 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { nodeKind, nodeMetaData } from "../page"
-import { timeNodeMetaData } from "@/app/create-workflow/component/nodes/triggers/Timer"
-import { priceTriggerMetaData } from './nodes/triggers/PriceTrigger'
-import { TradingMetaData } from './nodes/actions/Lighter'
-import { SUPPORTED_ASSETS } from './triggersheet'
+import { timeNodeMetaData } from 'common/types'
+import { TradingMetaData } from 'common/types'
 import { ArrowLeftRight, Zap, Package } from 'lucide-react'
+import { type priceTriggerMetaData } from 'common/types'
 
 const SUPPORTED_ACTION = [{
     id: "hyperliquid",

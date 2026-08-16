@@ -1,4 +1,4 @@
-import {SUPPORTED_ASSETS} from "@/app/create-workflow/component/triggersheet";
+import {SUPPORTED_ASSETS} from "common/types";
 import { cn } from "@/lib/utils";
 import { Handle,Position } from '@xyflow/react'
 import { ArrowLeftRight } from 'lucide-react'

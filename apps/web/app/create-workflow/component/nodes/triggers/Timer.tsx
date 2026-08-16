@@ -1,10 +1,7 @@
 import { Handle, Position } from '@xyflow/react'
 import { Clock } from 'lucide-react'
+import { timeNodeMetaData} from "common/types"
 import React from 'react'
-
-export type timeNodeMetaData = {
-    time : number
-}
 
 export function Timer({data,isConnectable}: {
     data : {

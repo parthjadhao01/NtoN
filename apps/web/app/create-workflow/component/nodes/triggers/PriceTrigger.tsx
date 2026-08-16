@@ -1,11 +1,8 @@
 import { Handle,Position } from '@xyflow/react'
 import { TrendingUp } from 'lucide-react'
 import React from 'react'
+import { priceTriggerMetaData } from "common/types"
 
-export type priceTriggerMetaData = {
-    asset : string,
-    price : number
-}
 
 export function PriceTrigger({data,isConnectable}: {
     data : {

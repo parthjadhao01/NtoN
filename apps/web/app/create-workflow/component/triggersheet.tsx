@@ -22,8 +22,8 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { nodeKind, nodeMetaData } from "../page"
-import { timeNodeMetaData } from "@/app/create-workflow/component/nodes/triggers/Timer"
-import { priceTriggerMetaData } from './nodes/triggers/PriceTrigger'
+import { timeNodeMetaData } from "common/types"
+import { priceTriggerMetaData } from "common/types"
 import { Clock, TrendingUp } from 'lucide-react'
 
 const SUPPORTED_TRIGGERS = [{

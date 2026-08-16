@@ -3,8 +3,10 @@ import { useState, useCallback } from 'react';
 import { ReactFlow, ReactFlowProvider, Background, BackgroundVariant, Controls, Panel, applyNodeChanges, applyEdgeChanges, addEdge, useReactFlow } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import Triggersheet from "./component/triggersheet"
-import { Timer, timeNodeMetaData } from "@/app/create-workflow/component/nodes/triggers/Timer"
-import { PriceTrigger, priceTriggerMetaData } from '@/app/create-workflow/component/nodes/triggers/PriceTrigger'
+import { Timer, } from "@/app/create-workflow/component/nodes/triggers/Timer"
+import { timeNodeMetaData } from "common/types"
+import { PriceTrigger } from '@/app/create-workflow/component/nodes/triggers/PriceTrigger'
+import { priceTriggerMetaData } from "common/types"
 import { Lighter, TradingMetaData } from './component/nodes/actions/Lighter';
 import { Hyperliquid } from './component/nodes/actions/Hyperliquid';
 import { Backpack } from './component/nodes/actions/Backpack';
@@ -13,9 +15,9 @@ import Actionsheet from "./component/actionsheet"
 const nodeTypes1 = {
     "time-trigger": Timer,
     "price-trigger": PriceTrigger,
-    "lighter" : Lighter,
-    "hyperliquid" : Hyperliquid,
-    "backpack" : Backpack
+    "lighter": Lighter,
+    "hyperliquid": Hyperliquid,
+    "backpack": Backpack
 }
 
 export type nodeTypes = "action" | "trigger"
@@ -52,7 +54,7 @@ function Flow() {
             x: number,
             y: number,
         },
-        startingNodeId : string,
+        startingNodeId: string,
     } | null>(null);
 
     const onNodesChange = useCallback(
@@ -70,11 +72,11 @@ function Flow() {
 
     const onConnectEnd = useCallback(
         (event: any, connectionState: any) => {
-            if(!connectionState.isValid){
+            if (!connectionState.isValid) {
                 const { clientX, clientY } = 'changedTouches' in event ? event.changedTouches[0] : event;
                 setSelectAction({
-                    position : screenToFlowPosition({ x: clientX, y: clientY }),
-                    startingNodeId : connectionState.fromNode.id
+                    position: screenToFlowPosition({ x: clientX, y: clientY }),
+                    startingNodeId: connectionState.fromNode.id
                 })
             }
         }, [screenToFlowPosition]
@@ -101,23 +103,23 @@ function Flow() {
             {selectAction && <Actionsheet onSelect={(type, metadata) => {
                 let actionNodeId = Math.random().toString();
                 setNodes([...nodes, {
-                    id : actionNodeId,
+                    id: actionNodeId,
                     type,
                     data: {
                         kind: "action",
                         metadata,
                     },
-                    position : selectAction.position
+                    position: selectAction.position
                 }])
-                setEdges([...edges,{
-                    id : `${selectAction.startingNodeId}-${actionNodeId}`,
-                    source : selectAction.startingNodeId,
-                    target : actionNodeId
+                setEdges([...edges, {
+                    id: `${selectAction.startingNodeId}-${actionNodeId}`,
+                    source: selectAction.startingNodeId,
+                    target: actionNodeId
                 }])
                 setSelectAction(null)
             }} />}
-            
-            
+
+
             {nodes.length > 0 &&
                 <ReactFlow
                     nodes={nodes}
@@ -132,7 +134,7 @@ function Flow() {
                     fitView
                 >
                     <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="var(--border)" />
-                    <Controls position='bottom-right'/>
+                    <Controls position='bottom-right' />
                     <Panel position="top-left" className="m-3! rounded-lg border border-border bg-card/90 px-3 py-1.5 text-xs font-medium text-foreground shadow-sm backdrop-blur">
                         Workflow Editor
                     </Panel>

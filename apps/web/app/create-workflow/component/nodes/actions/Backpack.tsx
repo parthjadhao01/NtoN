@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Handle,Position } from '@xyflow/react'
 import { Package } from 'lucide-react'
-import { TradingMetaData } from './Lighter'
+import { TradingMetaData } from 'common/types'
 
 export function Backpack({data} : {
     data : {

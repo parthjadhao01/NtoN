@@ -23,5 +23,8 @@
   ],
   "dependencies": {
     "@xyflow/react": "^12.11.0"
+  },
+  "overrides": {
+    "bson": "7.2.0"
   }
 }

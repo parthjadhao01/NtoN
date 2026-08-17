@@ -4,16 +4,13 @@ import mongoose, { Mongoose, Schema } from "mongoose";
 const UserSchema = new Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        unique : true
     },
     password: {
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true
-    }
 })
 
 const EdgeSchema = new Schema({
@@ -145,7 +142,31 @@ const ExecutionSchema = new Schema({
     }
 })
 
+const RefreshTokenSchema = new Schema(
+    {
+        userId : {
+            type : mongoose.Types.ObjectId,
+            ref : "User",
+            required : true
+        },
+        jti : {
+            type : String,
+            required : true,
+            unique : true
+        },
+        expiresAt : {
+            type : Date,
+            required : true,
+            expires : 0
+        }
+    },
+    {
+        timestamps : true
+    }
+)
+
 export const UserModel = mongoose.model("User", UserSchema);
 export const WorkflowModel = mongoose.model("Workflow", WorkflowSchema);
 export const NodeModel = mongoose.model("Node",NodeSchema);
 export const ExecutionModel = mongoose.model("Execution",ExecutionSchema);
+export const RefreshTokenModel = mongoose.model("RefreshToken",RefreshTokenSchema);

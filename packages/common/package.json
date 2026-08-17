@@ -9,7 +9,10 @@
   "peerDependencies": {
     "typescript": "^5"
   },
-  "exports" : {
-    "./types" : "./index.ts"
+  "exports": {
+    "./types": "./index.ts"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
   }
 }

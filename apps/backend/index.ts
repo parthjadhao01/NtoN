@@ -2,6 +2,10 @@ import express from "express"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes"
+import workFlowRouter from "./routes/workflow.routes"
+import nodeRouter from "./routes/node.routes"
+import authorizationMiddleware from "./middleware/auth.middleware";
+import { listWorkflows } from "./controllers/workflow.controllers";
 
 
 const app = express();
@@ -17,31 +21,15 @@ mongoose.connect(process.env.MONGO_URI).catch((err) => {
 
 app.use(cookieParser());
 app.use(express.json());
-app.use("/auth",authRouter)
-
-
-app.post("/workflow", (req, res) => {
-})
-
-app.put("/workflow/:workflowId", (req, res) => {
-})
-
-app.get("/workflow/:workflowId", (req, res) => {
-})
-
-app.get("/workflow/executions/:workflowId", (req, res) => {
-})
-
-app.get("/workflows", (req, res) => {
-})
+app.use("/auth", authRouter)
+app.use("/workflow", workFlowRouter)
+app.get("/workflows", authorizationMiddleware, listWorkflows)
+app.use("/nodes", nodeRouter)
 
 app.post("/credentials", (req, res) => {
 })
 
 app.get("/credentials", (req, res) => {
-})
-
-app.get("/nodes", (req, res) => {
 })
 
 app.listen(process.env.PORT || 3000, () => {

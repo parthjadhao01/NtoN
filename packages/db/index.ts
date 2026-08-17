@@ -32,22 +32,27 @@ const EdgeSchema = new Schema({
 })
 
 const PositionSchema = new Schema({
+    // Was String: the API validates x/y as numbers (see createWorkflowSchema
+    // in common/types), and canvas coordinates need to sort/compare
+    // numerically, not lexicographically ("10" < "9" as strings).
     x: {
-        type: String,
+        type: Number,
         required: true
     },
     y: {
-        type: String,
+        type: Number,
         required: true
     }
 })
 
 const NodeDataSchema = new Schema({
+    // `enum` was previously a sibling field (an unintended top-level array
+    // path), so it stored a stray "enum" key instead of constraining "kind".
     kind: {
         type: String,
-        required: true
+        required: true,
+        enum: ["ACTION", "TRIGGER"]
     },
-    enum: ["ACTION", "TRIGGER"],
     metadata: Schema.Types.Mixed
 }, {
     _id: false

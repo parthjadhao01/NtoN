@@ -53,6 +53,12 @@ const signup = async (req: Request, res: Response) => {
             message: "User created successfully"
         });
     } catch (err) {
+        if (err && typeof err === "object" && "code" in err && err.code === 11000) {
+            return res.status(409).json({
+                message: "Username already taken"
+            });
+        }
+
         console.log(err);
 
         return res.status(500).json({
